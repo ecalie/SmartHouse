@@ -1,6 +1,6 @@
 package modelisation.vue.element;
 
-import modelisation.modele.element.Actionnable.Television;
+import modelisation.modele.element.deuxEtats.Television;
 import modelisation.modele.element.Orientation;
 
 import java.awt.*;

@@ -1,6 +1,5 @@
-package modelisation.modele.element.Utilisable;
+package modelisation.modele.element.utilisable;
 
-import intelligence_artificielle.modele.Capteur;
 import intelligence_artificielle.modele.CapteurUtilisation;
 import modelisation.modele.element.Element;
 

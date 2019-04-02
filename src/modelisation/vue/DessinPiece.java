@@ -2,9 +2,9 @@ package modelisation.vue;
 
 import intelligence_artificielle.modele.Habitant;
 import modelisation.modele.Piece;
-import modelisation.modele.element.Actionnable.*;
+import modelisation.modele.element.deuxEtats.*;
 import modelisation.modele.element.*;
-import modelisation.modele.element.Utilisable.*;
+import modelisation.modele.element.utilisable.*;
 import modelisation.vue.element.*;
 
 import javax.swing.*;

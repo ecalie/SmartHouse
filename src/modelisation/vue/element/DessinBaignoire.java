@@ -1,7 +1,7 @@
 package modelisation.vue.element;
 
 import modelisation.modele.element.Orientation;
-import modelisation.modele.element.Utilisable.Baignoire;
+import modelisation.modele.element.utilisable.Baignoire;
 
 import java.awt.*;
 

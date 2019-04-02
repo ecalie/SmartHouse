@@ -1,6 +1,6 @@
 package modelisation.vue.element;
 
-import modelisation.modele.element.Actionnable.PlaqueCuisson;
+import modelisation.modele.element.deuxEtats.PlaqueCuisson;
 
 import java.awt.*;
 

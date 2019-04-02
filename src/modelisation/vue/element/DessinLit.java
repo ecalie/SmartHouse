@@ -1,7 +1,7 @@
 package modelisation.vue.element;
 
 import modelisation.modele.element.Orientation;
-import modelisation.modele.element.Utilisable.Lit;
+import modelisation.modele.element.utilisable.Lit;
 
 import java.awt.*;
 

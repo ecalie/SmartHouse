@@ -1,8 +1,8 @@
 import intelligence_artificielle.modele.CapteurUtilisation;
 import intelligence_artificielle.modele.CapteurPassage;
 import intelligence_artificielle.vue.FenetreLogging;
-import modelisation.modele.element.Actionnable.Actionnable;
-import modelisation.modele.element.Actionnable.Etat;
+import modelisation.modele.element.deuxEtats.DeuxEtats;
+import modelisation.modele.element.deuxEtats.Etat;
 
 public aspect LoggingCapteur {
 
@@ -13,7 +13,7 @@ public aspect LoggingCapteur {
         }
 
         if (thisJoinPoint.getTarget() instanceof CapteurUtilisation)
-            if (((CapteurUtilisation) thisJoinPoint.getTarget()).getAppareil() instanceof Actionnable)
+            if (((CapteurUtilisation) thisJoinPoint.getTarget()).getAppareil() instanceof DeuxEtats)
                 FenetreLogging.ajouterLoggingAction("L'habitant à " +
                         (((CapteurUtilisation) thisJoinPoint.getTarget()).getEtat() == Etat.Allume ? "allumé " : "éteint ") +
                         ((CapteurUtilisation) thisJoinPoint.getTarget()).getAppareil().getClass().getSimpleName());

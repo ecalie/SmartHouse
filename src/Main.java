@@ -1,7 +1,7 @@
 import intelligence_artificielle.modele.Habitant;
 import modelisation.modele.element.*;
-import modelisation.modele.element.Utilisable.*;
-import modelisation.modele.element.Actionnable.*;
+import modelisation.modele.element.utilisable.*;
+import modelisation.modele.element.deuxEtats.*;
 import modelisation.modele.Maison;
 import modelisation.modele.Piece;
 import modelisation.vue.DessinMaison;

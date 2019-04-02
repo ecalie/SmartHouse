@@ -1,12 +1,12 @@
-package modelisation.modele.element.Actionnable;
+package modelisation.modele.element.utilisable;
 
 import modelisation.modele.element.Orientation;
 
-public class Television extends Actionnable  {
+public class Chaise extends Utilisable {
 
     private Orientation orientation;
 
-    public Television(int x, int y, int longueur, int largeur, Orientation orientation) {
+    public Chaise(int x, int y, int longueur, int largeur, Orientation orientation) {
         super(x,y,longueur, largeur);
         this.orientation = orientation;
     }

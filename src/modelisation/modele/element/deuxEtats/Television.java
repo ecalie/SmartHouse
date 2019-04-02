@@ -1,12 +1,12 @@
-package modelisation.modele.element.Utilisable;
+package modelisation.modele.element.deuxEtats;
 
 import modelisation.modele.element.Orientation;
 
-public class Canape extends Utilisable {
+public class Television extends DeuxEtats {
 
     private Orientation orientation;
 
-    public Canape(int x, int y, int longueur, int largeur, Orientation orientation) {
+    public Television(int x, int y, int longueur, int largeur, Orientation orientation) {
         super(x,y,longueur, largeur);
         this.orientation = orientation;
     }

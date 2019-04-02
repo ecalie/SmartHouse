@@ -1,7 +1,7 @@
 package modelisation.vue.element;
 
 import modelisation.modele.element.Orientation;
-import modelisation.modele.element.Utilisable.Canape;
+import modelisation.modele.element.utilisable.Canape;
 
 import java.awt.*;
 

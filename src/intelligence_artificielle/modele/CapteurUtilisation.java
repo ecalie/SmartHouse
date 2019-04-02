@@ -1,7 +1,6 @@
 package intelligence_artificielle.modele;
 
-import modelisation.modele.element.Actionnable.Actionnable;
-import modelisation.modele.element.Actionnable.Etat;
+import modelisation.modele.element.deuxEtats.Etat;
 import modelisation.modele.element.Element;
 
 public class CapteurUtilisation implements Capteur {

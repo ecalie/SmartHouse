@@ -1,4 +1,4 @@
-package modelisation.modele.element.Utilisable;
+package modelisation.modele.element.utilisable;
 
 import modelisation.modele.element.Orientation;
 

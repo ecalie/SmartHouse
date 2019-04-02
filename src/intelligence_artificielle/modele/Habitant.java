@@ -2,8 +2,8 @@ package intelligence_artificielle.modele;
 
 import modelisation.modele.Maison;
 import modelisation.modele.Piece;
-import modelisation.modele.element.Actionnable.Actionnable;
-import modelisation.modele.element.Utilisable.Utilisable;
+import modelisation.modele.element.deuxEtats.DeuxEtats;
+import modelisation.modele.element.utilisable.Utilisable;
 import patrons.observer.Observable;
 
 import java.util.ArrayList;
@@ -38,12 +38,12 @@ public class Habitant extends Observable {
         element.liberer();
     }
 
-    public void allumer(Actionnable element) {
+    public void allumer(DeuxEtats element) {
         this.aller(maison.chercher(element));
         element.allumer();
     }
 
-    public void eteindre(Actionnable element) {
+    public void eteindre(DeuxEtats element) {
         assert (position == maison.chercher(element));
         element.eteindre();
     }
