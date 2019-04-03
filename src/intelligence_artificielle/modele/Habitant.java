@@ -1,9 +1,10 @@
 package intelligence_artificielle.modele;
 
-import modelisation.modele.Maison;
-import modelisation.modele.Piece;
-import modelisation.modele.element.deuxEtats.DeuxEtats;
-import modelisation.modele.element.utilisable.Utilisable;
+import simulation.modele.Maison;
+import simulation.modele.Piece;
+import simulation.modele.element.Element;
+import simulation.modele.element.deuxEtats.DeuxEtats;
+import simulation.modele.element.utilisable.Utilisable;
 import patrons.observer.Observable;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Habitant extends Observable {
 
     private Piece position;
     private Maison maison;
+    private Utilisable elementUtilise;
 
     public Habitant(Maison maison) {
         this.position = maison.getEntree();
@@ -27,15 +29,22 @@ public class Habitant extends Observable {
     // FAIRE ACTION //
     //////////////////
 
-    public void utiliser(Utilisable element, int duree) {
-        this.aller(maison.chercher(element));
-        element.utiliser();
+    public void utiliser(Utilisable element) {
         try {
-            Thread.sleep(duree);
+            this.aller(maison.chercher(element));
+            this.elementUtilise = element;
+            element.utiliser();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        element.liberer();
+    }
+
+    public void terminerAction() {
+        if (this.elementUtilise != null) {
+            this.elementUtilise.liberer();
+            elementUtilise = null;
+        }
     }
 
     public void allumer(DeuxEtats element) {
@@ -44,7 +53,7 @@ public class Habitant extends Observable {
     }
 
     public void eteindre(DeuxEtats element) {
-        assert (position == maison.chercher(element));
+        this.aller(maison.chercher(element));
         element.eteindre();
     }
 
@@ -70,7 +79,7 @@ public class Habitant extends Observable {
         piece.notifier();
         this.notifier();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -87,8 +96,8 @@ public class Habitant extends Observable {
         }
 
         List<Piece> pieces = new ArrayList();
-        for (Piece p : maison.getPieces())
-            pieces.add(p);
+        pieces.addAll(maison.getPieces());
+
         pieces.remove(position);
         List<Piece> chemin = this.trouverChemin(piece, position, pieces, new ArrayList<>());
         for (Piece p : chemin)
@@ -105,8 +114,8 @@ public class Habitant extends Observable {
             if (p != position && maison.sontAdjacentes(position, p)) {
                 chemin.add(p);
                 List<Piece> copie = new ArrayList<>();
-                for (Piece piece : pieces)
-                    copie.add(piece);
+                copie.addAll(pieces);
+
                 copie.remove(p);
                 List<Piece> ch = trouverChemin(but, p, copie, chemin);
                 if (ch != null)

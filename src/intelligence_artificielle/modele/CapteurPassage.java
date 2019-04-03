@@ -1,6 +1,6 @@
 package intelligence_artificielle.modele;
 
-import modelisation.modele.Piece;
+import simulation.modele.Piece;
 
 public class CapteurPassage implements Capteur {
 
