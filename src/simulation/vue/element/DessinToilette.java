@@ -20,23 +20,23 @@ public class DessinToilette implements DessinElement {
         int L = toilette.getLongueur();
 
         if (toilette.getOrientation() == Orientation.Nord) {
-            g.drawRect(x,y+l*35/60,L,l/2);
-            g.drawArc(x+5,y,L-10,l/2,-10,200);
+            g.drawRect(x, y + l * 35 / 60, L, l / 2);
+            g.drawArc(x + 5, y, L - 10, l / 2, -10, 200);
         }
 
         if (toilette.getOrientation() == Orientation.Est) {
-            g.drawRect(x, y, L/2, l);
-            g.drawArc(x, y + 5, L, l-10,-100,200);
+            g.drawRect(x, y, L / 2, l);
+            g.drawArc(x, y + 5, L, l - 10, -100, 200);
         }
 
         if (toilette.getOrientation() == Orientation.Sud) {
-            g.drawRect(x, y, L, l/2);
-            g.drawArc(x + 5, y + l, L-10, l,160,200);
+            g.drawRect(x, y, L, l / 2);
+            g.drawArc(x + 5, y + l, L - 10, l, 160, 200);
         }
 
         if (toilette.getOrientation() == Orientation.Ouest) {
-            g.drawRect(x + L*35/60, y, L/2, l);
-            g.drawArc(x, y + 5, L, l-10,80,200);
+            g.drawRect(x + L * 35 / 60, y, L / 2, l);
+            g.drawArc(x, y + 5, L, l - 10, 80, 200);
         }
     }
 }

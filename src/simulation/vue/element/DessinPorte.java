@@ -19,25 +19,25 @@ public class DessinPorte implements DessinElement {
         int l = porte.getLargeur();
 
         if (porte.getSensOuverture() == Orientation.Nord) {
-            g.drawArc(x - l, y - l, 2*l, l*2, 0, 90);
+            g.drawArc(x - l, y - l, 2 * l, l * 2, 0, 90);
             g.drawLine(x, y, x, y - l);
             g.drawLine(x, y, x + l, y);
         }
 
         if (porte.getSensOuverture() == Orientation.Est) {
-            g.drawArc(x - l, y - l, l*2, l*2, 0, -90);
+            g.drawArc(x - l, y - l, l * 2, l * 2, 0, -90);
             g.drawLine(x, y, x, y + l);
             g.drawLine(x, y, x + l, y);
         }
 
         if (porte.getSensOuverture() == Orientation.Sud) {
-            g.drawArc(x - l, y - l, l*2, l*2, 180, 90);
+            g.drawArc(x - l, y - l, l * 2, l * 2, 180, 90);
             g.drawLine(x, y, x - l, y);
             g.drawLine(x, y, x, y + l);
         }
 
-        if(porte.getSensOuverture() == Orientation.Ouest) {
-            g.drawArc(x - l, y - l, l*2, l*2, 180, -90);
+        if (porte.getSensOuverture() == Orientation.Ouest) {
+            g.drawArc(x - l, y - l, l * 2, l * 2, 180, -90);
             g.drawLine(x, y, x - l, y);
             g.drawLine(x, y, x, y - l);
         }

@@ -2,8 +2,8 @@ package simulation.modele;
 
 import intelligence_artificielle.modele.Capteur;
 import intelligence_artificielle.modele.CapteurPassage;
-import simulation.modele.element.Element;
 import patrons.observer.Observable;
+import simulation.modele.element.Element;
 
 import java.util.ArrayList;
 import java.util.List;

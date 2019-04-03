@@ -18,9 +18,9 @@ public class DessinTable implements DessinElement {
         int x = table.getX();
         int y = table.getY();
 
-        g.drawRect(x+5,y,L-5,l-5);
-        g.drawLine(x+5,y,x,y+5);
-        g.drawLine(x,y+l,x+5,y+l-5);
-        g.drawLine(x+L,y+l-5,x+L-5,y+l);
+        g.drawRect(x + 5, y, L - 5, l - 5);
+        g.drawLine(x + 5, y, x, y + 5);
+        g.drawLine(x, y + l, x + 5, y + l - 5);
+        g.drawLine(x + L, y + l - 5, x + L - 5, y + l);
     }
 }

@@ -6,6 +6,6 @@ public class Table extends Element {
     private int largeur;
 
     public Table(int x, int y, int longueur, int largeur) {
-        super(x,y,longueur, largeur);
+        super(x, y, longueur, largeur);
     }
 }

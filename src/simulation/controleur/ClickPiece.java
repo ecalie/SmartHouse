@@ -1,6 +1,6 @@
 package simulation.controleur;
 
-import intelligence_artificielle.modele.Habitant;
+import simulation.modele.Habitant;
 import simulation.modele.Piece;
 import simulation.modele.element.Element;
 import simulation.modele.element.deuxEtats.DeuxEtats;
@@ -36,12 +36,12 @@ public class ClickPiece implements MouseListener {
                     else
                         habitant.eteindre((DeuxEtats) e);
 
-                    elementTrouve = true;
+                elementTrouve = true;
                 break;
             }
         }
-         if (!elementTrouve)
-             habitant.aller(piece);
+        if (!elementTrouve)
+            habitant.aller(piece);
     }
 
     @Override

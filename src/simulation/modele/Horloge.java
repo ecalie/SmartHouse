@@ -24,7 +24,7 @@ public class Horloge extends Observable implements Runnable {
     @Override
     public void run() {
         while (true) {
-            heure = (heure + 1)%24;
+            heure = (heure + 1) % 24;
             this.notifier();
             try {
                 Thread.sleep(1000);

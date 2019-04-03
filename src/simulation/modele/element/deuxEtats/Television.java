@@ -7,7 +7,7 @@ public class Television extends DeuxEtats {
     private Orientation orientation;
 
     public Television(int x, int y, int longueur, int largeur, Orientation orientation) {
-        super(x,y,longueur, largeur);
+        super(x, y, longueur, largeur);
         this.orientation = orientation;
     }
 

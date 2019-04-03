@@ -1,9 +1,13 @@
 package simulation.vue;
 
-import intelligence_artificielle.modele.Habitant;
+import simulation.modele.Habitant;
 import simulation.modele.Piece;
-import simulation.modele.element.deuxEtats.*;
-import simulation.modele.element.*;
+import simulation.modele.element.Meuble;
+import simulation.modele.element.Mur;
+import simulation.modele.element.Porte;
+import simulation.modele.element.Table;
+import simulation.modele.element.deuxEtats.PlaqueCuisson;
+import simulation.modele.element.deuxEtats.Television;
 import simulation.modele.element.utilisable.*;
 import simulation.vue.element.*;
 
@@ -33,13 +37,13 @@ public class DessinPiece extends JPanel {
                 elements.add(new DessinBaignoire((Baignoire) e));
 
             if (e instanceof Canape)
-                elements.add(new DessinCanape((Canape)e));
+                elements.add(new DessinCanape((Canape) e));
 
             if (e instanceof Chaise)
                 elements.add(new DessinChaise((Chaise) e));
 
             if (e instanceof Table)
-                elements.add(new DessinTable((Table)e));
+                elements.add(new DessinTable((Table) e));
 
             if (e instanceof Television)
                 elements.add(new DessinTelevision((Television) e));
@@ -57,7 +61,7 @@ public class DessinPiece extends JPanel {
                 elements.add(new DessinMur((Mur) e));
 
             if (e instanceof PlaqueCuisson)
-                elements.add(new DessinPlaqueCuisson((PlaqueCuisson)e));
+                elements.add(new DessinPlaqueCuisson((PlaqueCuisson) e));
 
             if (e instanceof Porte)
                 elements.add(new DessinPorte((Porte) e));

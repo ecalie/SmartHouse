@@ -1,4 +1,4 @@
-import intelligence_artificielle.modele.Habitant;
+import simulation.modele.Habitant;
 import intelligence_artificielle.vue.FenetreLogging;
 import simulation.modele.Horloge;
 import simulation.modele.Maison;

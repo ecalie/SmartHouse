@@ -20,13 +20,13 @@ public class DessinBaignoire implements DessinElement {
         int y = baignoire.getY();
 
         if (baignoire.getOrientation() == Orientation.Est || baignoire.getOrientation() == Orientation.Ouest) { // horizontal
-            g.drawRect(x,y,L,l);
-            g.drawOval(x+1,y+1,L-2,l-2);
+            g.drawRect(x, y, L, l);
+            g.drawOval(x + 1, y + 1, L - 2, l - 2);
         }
 
         if (baignoire.getOrientation() == Orientation.Sud || baignoire.getOrientation() == Orientation.Nord) { // vertical
             g.drawRect(x, y, L, l);
-            g.drawOval(x+1, y+1, L-2, l-2);
+            g.drawOval(x + 1, y + 1, L - 2, l - 2);
         }
     }
 }

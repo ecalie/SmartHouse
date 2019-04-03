@@ -12,7 +12,7 @@ public class DessinHorloge extends JFrame implements Observer {
 
     public DessinHorloge() {
         super("Horloge");
-        this.heure = new JTextArea(1,5);
+        this.heure = new JTextArea(1, 5);
         heure.setText(Horloge.getInstance().toString());
         heure.setBackground(Color.DARK_GRAY);
         heure.setForeground(Color.WHITE);
@@ -20,7 +20,7 @@ public class DessinHorloge extends JFrame implements Observer {
 
         this.add(heure);
         this.pack();
-        this.setLocation(600,0);
+        this.setLocation(600, 0);
         this.setVisible(true);
     }
 

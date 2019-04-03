@@ -19,6 +19,6 @@ public class DessinMur implements DessinElement {
         int l = mur.getLargeur();
 
         g.setColor(Color.BLACK);
-        g.drawLine(x,y,x+L,y+l);
+        g.drawLine(x, y, x + L, y + l);
     }
 }

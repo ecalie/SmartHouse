@@ -1,16 +1,16 @@
 package simulation.vue;
 
-import intelligence_artificielle.modele.Habitant;
+import simulation.modele.Habitant;
+import patrons.observer.Observer;
 import simulation.controleur.ClickPiece;
 import simulation.modele.Horloge;
 import simulation.modele.Maison;
 import simulation.modele.Piece;
-import patrons.observer.Observer;
 
 import javax.swing.*;
-import java.util.List;
-import java.util.ArrayList;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DessinMaison extends JFrame implements Observer {
 
@@ -27,7 +27,7 @@ public class DessinMaison extends JFrame implements Observer {
             gbc.gridwidth = p.getLongueur();
             gbc.gridheight = p.getLargeur();
             DessinPiece dessinPiece = new DessinPiece(p, habitant);
-            dessinPiece.setBackground(new Color(140,140,140));
+            dessinPiece.setBackground(new Color(140, 140, 140));
             dessinPiece.addMouseListener(new ClickPiece(p, habitant));
             panel.add(dessinPiece, gbc);
             dessinPieces.add(dessinPiece);
@@ -44,8 +44,8 @@ public class DessinMaison extends JFrame implements Observer {
         int heure = Horloge.getInstance().getHeure();
         for (DessinPiece dp : dessinPieces)
             if (heure < 7 || heure > 21)
-                dp.setBackground(new Color(100,100,100));
+                dp.setBackground(new Color(100, 100, 100));
             else
-                dp.setBackground(new Color(180 - Math.abs(14-heure)*10, 180 - Math.abs(14-heure)*10, 180 - Math.abs(14-heure)*10));
+                dp.setBackground(new Color(180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10));
     }
 }

@@ -18,10 +18,10 @@ public class DessinPlaqueCuisson implements DessinElement {
         int L = plaqueCuisson.getLongueur();
         int l = plaqueCuisson.getLargeur();
 
-        g.drawRect(x,y,L,l);
-        g.drawArc(x+L/9,y+l/9,L/3,l/3,0,360);
-        g.drawArc(x+L-4*L/9,y+l/9,L/3,l/3,0,360);
-        g.drawArc(x+L/9,y+l-4*l/9,L/3,l/3,0,360);
-        g.drawArc(x+L-4*L/9,y+l-4*l/9,L/3,l/3,0,360);
+        g.drawRect(x, y, L, l);
+        g.drawArc(x + L / 9, y + l / 9, L / 3, l / 3, 0, 360);
+        g.drawArc(x + L - 4 * L / 9, y + l / 9, L / 3, l / 3, 0, 360);
+        g.drawArc(x + L / 9, y + l - 4 * l / 9, L / 3, l / 3, 0, 360);
+        g.drawArc(x + L - 4 * L / 9, y + l - 4 * l / 9, L / 3, l / 3, 0, 360);
     }
 }

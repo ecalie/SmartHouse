@@ -1,11 +1,10 @@
-package intelligence_artificielle.modele;
+package simulation.modele;
 
+import patrons.observer.Observable;
 import simulation.modele.Maison;
 import simulation.modele.Piece;
-import simulation.modele.element.Element;
 import simulation.modele.element.deuxEtats.DeuxEtats;
 import simulation.modele.element.utilisable.Utilisable;
-import patrons.observer.Observable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +71,7 @@ public class Habitant extends Observable {
 
     /**
      * L'habitant se déplace dans une pièce adjacente.
+     *
      * @param piece La pièce adjacente où se rend l'habitant
      */
     public void entrer(Piece piece) {
@@ -87,6 +87,7 @@ public class Habitant extends Observable {
 
     /**
      * L'habitant se déplace dans une pièce de la maison.
+     *
      * @param piece La pièce où se rend l'habitant
      */
     public void aller(Piece piece) {
@@ -109,7 +110,7 @@ public class Habitant extends Observable {
             return chemin;
         }
 
-        for (int i = 0 ; i < pieces.size() ; i++) {
+        for (int i = 0; i < pieces.size(); i++) {
             Piece p = pieces.get(i);
             if (p != position && maison.sontAdjacentes(position, p)) {
                 chemin.add(p);
@@ -123,8 +124,6 @@ public class Habitant extends Observable {
                 chemin.remove(p);
             }
         }
-
         return null;
     }
-
 }
