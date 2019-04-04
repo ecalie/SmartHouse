@@ -1,8 +1,6 @@
 package simulation.modele;
 
 import patrons.observer.Observable;
-import simulation.modele.Maison;
-import simulation.modele.Piece;
 import simulation.modele.element.deuxEtats.DeuxEtats;
 import simulation.modele.element.utilisable.Utilisable;
 
@@ -60,11 +58,11 @@ public class Habitant extends Observable {
     // SE DEPLACER //
     /////////////////
 
-    public void entrer() {
+    public void entrerMaison() {
         this.position = maison.getEntree();
     }
 
-    public void sortir() {
+    public void sortirMaison() {
         assert (this.position == maison.getEntree());
         this.position = null;
     }
@@ -74,8 +72,9 @@ public class Habitant extends Observable {
      *
      * @param piece La pièce adjacente où se rend l'habitant
      */
-    public void entrer(Piece piece) {
+    public void seDeplacer(Piece piece) {
         position = piece;
+        // déclencher le capteur de passage
         piece.notifier();
         this.notifier();
         try {
@@ -93,32 +92,25 @@ public class Habitant extends Observable {
     public void aller(Piece piece) {
         // rentrer dans la maison si l'habitant est dehors
         if (position == null) {
-            this.entrer();
+            this.entrerMaison();
         }
 
-        List<Piece> pieces = new ArrayList();
-        pieces.addAll(maison.getPieces());
-
-        pieces.remove(position);
-        List<Piece> chemin = this.trouverChemin(piece, position, pieces, new ArrayList<>());
+        List<Piece> chemin = this.trouverChemin(piece, position, new ArrayList<>());
         for (Piece p : chemin)
-            this.entrer(p);
+            this.seDeplacer(p);
     }
 
-    private List<Piece> trouverChemin(Piece but, Piece position, List<Piece> pieces, List<Piece> chemin) {
+    private List<Piece> trouverChemin(Piece but, Piece position, List<Piece> chemin) {
         if (position == but) {
             return chemin;
         }
 
-        for (int i = 0; i < pieces.size(); i++) {
-            Piece p = pieces.get(i);
-            if (p != position && maison.sontAdjacentes(position, p)) {
+        for (Point pt : position.getConnexionsEntrePieces().keySet()) {
+            Piece p = position.getConnexionsEntrePieces().get(pt);
+            if (!chemin.contains(p) && p != null) {
                 chemin.add(p);
-                List<Piece> copie = new ArrayList<>();
-                copie.addAll(pieces);
 
-                copie.remove(p);
-                List<Piece> ch = trouverChemin(but, p, copie, chemin);
+                List<Piece> ch = trouverChemin(but, p, chemin);
                 if (ch != null)
                     return ch;
                 chemin.remove(p);

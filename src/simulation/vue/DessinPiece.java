@@ -2,6 +2,7 @@ package simulation.vue;
 
 import simulation.modele.Habitant;
 import simulation.modele.Piece;
+import simulation.modele.Point;
 import simulation.modele.element.Meuble;
 import simulation.modele.element.Mur;
 import simulation.modele.element.Porte;
@@ -79,6 +80,13 @@ public class DessinPiece extends JPanel {
 
         if (habitant.getPosition() == piece)
             new DessinHabitant().dessiner(g, piece.getHabitantX(), piece.getHabitantY());
+
+        if (piece.isLumiereAllumee())
+            this.setBackground(new Color(200,200,200));
+
+        for (Point p : piece.getConnexionsEntrePieces().keySet()) {
+            g.drawLine(p.getX(), p.getY(), p.getX(), p.getY());
+        }
     }
 
 }
