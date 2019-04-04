@@ -1,8 +1,6 @@
 package simulation.modele.element;
 
-import patrons.observer.Observable;
-
-public abstract class Element extends Observable {
+public abstract class Element {
 
     private int x;
     private int y;

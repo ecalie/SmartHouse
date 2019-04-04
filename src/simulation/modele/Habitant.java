@@ -1,20 +1,21 @@
 package simulation.modele;
 
-import patrons.observer.Observable;
+import patrons.observer.ObservableParametre;
 import simulation.modele.element.deuxEtats.DeuxEtats;
 import simulation.modele.element.utilisable.Utilisable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Habitant extends Observable {
+public class Habitant extends ObservableParametre {
 
     private Piece position;
     private Maison maison;
     private Utilisable elementUtilise;
 
     public Habitant(Maison maison) {
-        this.position = maison.getEntree();
+        // initialement l'habitant n'est pas dans la maison
+        this.position = null;
         this.maison = maison;
     }
 
@@ -59,11 +60,15 @@ public class Habitant extends Observable {
     /////////////////
 
     public void entrerMaison() {
+        // déclencher le bon capteur
+        maison.recupererCapteurPassage(position, maison.getEntree()).declencher();
         this.position = maison.getEntree();
+        this.notifier(position);
     }
 
     public void sortirMaison() {
         assert (this.position == maison.getEntree());
+        this.notifier(position);
         this.position = null;
     }
 
@@ -72,13 +77,14 @@ public class Habitant extends Observable {
      *
      * @param piece La pièce adjacente où se rend l'habitant
      */
-    public void seDeplacer(Piece piece) {
+    private void seDeplacer(Piece piece) {
+        // déclencher le bon capteur
+        maison.recupererCapteurPassage(position, piece).declencher();
+        this.notifier(position);
         position = piece;
-        // déclencher le capteur de passage
-        piece.notifier();
-        this.notifier();
+        this.notifier(position);
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

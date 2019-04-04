@@ -1,8 +1,8 @@
 package simulation.vue;
 
 import simulation.modele.Habitant;
+import simulation.modele.Horloge;
 import simulation.modele.Piece;
-import simulation.modele.Point;
 import simulation.modele.element.Meuble;
 import simulation.modele.element.Mur;
 import simulation.modele.element.Porte;
@@ -29,6 +29,10 @@ public class DessinPiece extends JPanel {
         this.piece = piece;
         this.habitant = habitant;
         setPreferredSize(new Dimension(piece.getLongueur(), piece.getLargeur()));
+    }
+
+    public Piece getPiece() {
+        return piece;
     }
 
     private void initialiser() {
@@ -75,18 +79,20 @@ public class DessinPiece extends JPanel {
         if (this.elements == null)
             initialiser();
 
+        if (piece.isLumiereAllumee()) {
+            this.setBackground(new Color(200, 200, 200));
+        } else {
+            int heure = Horloge.getInstance().getHeure();
+            if (heure < 7 || heure > 21)
+                this.setBackground(new Color(100, 100, 100));
+            else
+                this.setBackground(new Color(180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10));
+        }
+
         for (DessinElement e : elements)
             e.dessiner(g);
 
         if (habitant.getPosition() == piece)
             new DessinHabitant().dessiner(g, piece.getHabitantX(), piece.getHabitantY());
-
-        if (piece.isLumiereAllumee())
-            this.setBackground(new Color(200,200,200));
-
-        for (Point p : piece.getConnexionsEntrePieces().keySet()) {
-            g.drawLine(p.getX(), p.getY(), p.getX(), p.getY());
-        }
     }
-
 }

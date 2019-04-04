@@ -1,8 +1,9 @@
 package simulation.vue;
 
-import simulation.modele.Habitant;
 import patrons.observer.Observer;
+import patrons.observer.ObserverParametre;
 import simulation.controleur.ClickPiece;
+import simulation.modele.Habitant;
 import simulation.modele.Horloge;
 import simulation.modele.Maison;
 import simulation.modele.Piece;
@@ -12,7 +13,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DessinMaison extends JFrame implements Observer {
+public class DessinMaison extends JFrame implements ObserverParametre, Observer {
 
     private List<DessinPiece> dessinPieces;
 
@@ -39,13 +40,25 @@ public class DessinMaison extends JFrame implements Observer {
 
     }
 
-    public void update() {
-        this.repaint();
-        int heure = Horloge.getInstance().getHeure();
+    @Override
+    public void update(Piece piece) {
+        System.out.println("dessiner " + piece);
         for (DessinPiece dp : dessinPieces)
-            if (heure < 7 || heure > 21)
-                dp.setBackground(new Color(100, 100, 100));
-            else
-                dp.setBackground(new Color(180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10));
+            if (dp.getPiece() == piece)
+                dp.repaint();
+    }
+
+    @Override
+    public void update() {
+        for (DessinPiece dp : dessinPieces)
+            if (dp.getPiece().isLumiereAllumee()) {
+                dp.setBackground(new Color(200, 200, 200));
+            } else {
+                int heure = Horloge.getInstance().getHeure();
+                if (heure < 7 || heure > 21)
+                    dp.setBackground(new Color(100, 100, 100));
+                else
+                    dp.setBackground(new Color(180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10));
+            }
     }
 }

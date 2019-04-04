@@ -5,18 +5,19 @@ import simulation.modele.element.Element;
 
 public abstract class Utilisable extends Element {
 
+    private CapteurUtilisation capteur;
 
     protected Utilisable(int x, int y, int longueur, int largeur) {
         super(x, y, longueur, largeur);
-        this.ajouterObserver(new CapteurUtilisation(this));
+        this.capteur = new CapteurUtilisation(this);
     }
 
     public void utiliser() {
-        this.notifier();
+        this.capteur.declencher();
     }
 
     public void liberer() {
-        this.notifier();
+        this.capteur.declencher();
     }
 
 }

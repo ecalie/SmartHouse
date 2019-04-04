@@ -1,5 +1,6 @@
-import simulation.modele.*;
+import intelligence_artificielle.modele.CapteurPassage;
 import intelligence_artificielle.vue.FenetreLogging;
+import simulation.modele.*;
 import simulation.modele.element.*;
 import simulation.modele.element.deuxEtats.PlaqueCuisson;
 import simulation.modele.element.deuxEtats.Television;
@@ -24,33 +25,40 @@ public class Main {
         maison.setEntree(salon);
 
         HashMap<Point, Piece> connexions = new HashMap<>();
-        connexions.put(new Point(200,87), couloir);
-        chambre.definirConnexions(connexions);
+        connexions.put(new Point(200, 87), couloir);
+        chambre.setConnexions(connexions);
 
         connexions = new HashMap<>();
-        connexions.put(new Point(11,65), couloir);
-        salleDeBain.definirConnexions(connexions);
+        connexions.put(new Point(11, 65), couloir);
+        salleDeBain.setConnexions(connexions);
 
         connexions = new HashMap<>();
-        connexions.put(new Point(5,22), couloir);
-        wc.definirConnexions(connexions);
+        connexions.put(new Point(5, 22), couloir);
+        wc.setConnexions(connexions);
 
         connexions = new HashMap<>();
-        connexions.put(new Point(0,22), chambre);
-        connexions.put(new Point(11,0), salleDeBain);
-        connexions.put(new Point(50,22), wc);
-        connexions.put(new Point(0,195), salon);
-        connexions.put(new Point(50,50), cuisine);
-        couloir.definirConnexions(connexions);
+        connexions.put(new Point(0, 22), chambre);
+        connexions.put(new Point(11, 0), salleDeBain);
+        connexions.put(new Point(50, 22), wc);
+        connexions.put(new Point(0, 195), salon);
+        connexions.put(new Point(50, 50), cuisine);
+        couloir.setConnexions(connexions);
 
         connexions = new HashMap<>();
-        connexions.put(new Point(200,160), couloir);
-        connexions.put(new Point(0,11), null);
-        salon.definirConnexions(connexions);
+        connexions.put(new Point(200, 160), couloir);
+        connexions.put(new Point(0, 11), null);
+        salon.setConnexions(connexions);
 
         connexions = new HashMap<>();
-        connexions.put(new Point(0,15), couloir);
-        cuisine.definirConnexions(connexions);
+        connexions.put(new Point(0, 15), couloir);
+        cuisine.setConnexions(connexions);
+
+        maison.ajouterCapteur(new CapteurPassage(salon, null));
+        maison.ajouterCapteur(new CapteurPassage(salon, couloir));
+        maison.ajouterCapteur(new CapteurPassage(cuisine, couloir));
+        maison.ajouterCapteur(new CapteurPassage(wc, couloir));
+        maison.ajouterCapteur(new CapteurPassage(salleDeBain, couloir));
+        maison.ajouterCapteur(new CapteurPassage(chambre, couloir));
 
         maison.ajouterSalle(chambre);
         maison.ajouterSalle(salleDeBain);
@@ -103,11 +111,15 @@ public class Main {
         couloir.ajouter(new Mur(0, 234, 50, 0));
 
         Habitant habitant = new Habitant(maison);
+
+        new Thread(Horloge.getInstance()).start();
+        Horloge.getInstance().ajouterObserver(new DessinHorloge());
+
+        FenetreLogging.initialiser();
+
         DessinMaison dessinMaison = new DessinMaison(maison, habitant);
         Horloge.getInstance().ajouterObserver(dessinMaison);
 
-        Horloge.getInstance().ajouterObserver(new DessinHorloge());
-        FenetreLogging.initialiser();
-        new Thread(Horloge.getInstance()).start();
+        habitant.ajouterObserver(dessinMaison);
     }
 }

@@ -3,15 +3,14 @@ package intelligence_artificielle.modele;
 import simulation.modele.Piece;
 
 /**
- * Capteur entre deux pièces.
- * Il ne permet pas de détecter le sens de passage.
+ * Un capteur de passage a détecté un mouvement, il envoie un message au LumiereManager.
  */
-public class CapteurPassage implements Capteur {
+public class MessagePassage {
 
     private Piece piece1;
     private Piece piece2;
 
-    public CapteurPassage(Piece piece1, Piece piece2) {
+    public MessagePassage(Piece piece1, Piece piece2) {
         this.piece1 = piece1;
         this.piece2 = piece2;
     }
@@ -24,9 +23,7 @@ public class CapteurPassage implements Capteur {
         return piece2;
     }
 
-    @Override
-    public void declencher() {
-        new MessagePassage(piece1, piece2).envoyer();
+    public void envoyer() {
+        LumiereManager.getInstance().traiterMessage(this);
     }
-
 }

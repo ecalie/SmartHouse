@@ -22,7 +22,7 @@ public class CapteurUtilisation implements Capteur {
     }
 
     @Override
-    public void update() {
+    public void declencher() {
         if (etat == Etat.Allume)
             etat = Etat.Eteint;
         else
