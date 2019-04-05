@@ -42,7 +42,6 @@ public class DessinMaison extends JFrame implements ObserverParametre, Observer 
 
     @Override
     public void update(Piece piece) {
-        System.out.println("dessiner " + piece);
         for (DessinPiece dp : dessinPieces)
             if (dp.getPiece() == piece)
                 dp.repaint();
