@@ -6,7 +6,7 @@ import simulation.modele.Horloge;
 import javax.swing.*;
 import java.awt.*;
 
-public class DessinHorloge extends JFrame implements Observer {
+public class DessinHorloge extends JFrame implements Observer<Integer> {
 
     private JTextArea heure;
 
@@ -25,7 +25,7 @@ public class DessinHorloge extends JFrame implements Observer {
     }
 
     @Override
-    public void update() {
-        this.heure.setText(Horloge.getInstance().toString());
+    public void update(Integer heure) {
+        this.heure.setText((heure < 10 ? "0" : "") + heure + ":00");
     }
 }

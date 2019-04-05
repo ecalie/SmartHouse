@@ -2,7 +2,7 @@ package simulation.modele.element.deuxEtats;
 
 import simulation.modele.element.Orientation;
 
-public class Television extends DeuxEtats {
+public class Television extends AppareilDeuxEtats {
 
     private Orientation orientation;
 

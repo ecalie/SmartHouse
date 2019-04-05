@@ -3,7 +3,7 @@ package patrons.observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Observable {
+public abstract class Observable<T> {
 
     private List<Observer> observers;
 
@@ -16,12 +16,8 @@ public abstract class Observable {
         this.observers.add(observer);
     }
 
-    public void supprimerObserver(Observer observer) {
-        this.observers.remove(observer);
-    }
-
-    public void notifier() {
+    public void notifier(T objet) {
         for (Observer o : observers)
-            o.update();
+            o.update(objet);
     }
 }

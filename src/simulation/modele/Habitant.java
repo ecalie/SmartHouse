@@ -1,13 +1,13 @@
 package simulation.modele;
 
-import patrons.observer.ObservableParametre;
-import simulation.modele.element.deuxEtats.DeuxEtats;
+import patrons.observer.Observable;
+import simulation.modele.element.deuxEtats.AppareilDeuxEtats;
 import simulation.modele.element.utilisable.Utilisable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Habitant extends ObservableParametre {
+public class Habitant extends Observable {
 
     private Piece position;
     private Maison maison;
@@ -45,12 +45,12 @@ public class Habitant extends ObservableParametre {
         }
     }
 
-    public void allumer(DeuxEtats element) {
+    public void allumer(AppareilDeuxEtats element) {
         this.aller(maison.chercher(element));
         element.allumer();
     }
 
-    public void eteindre(DeuxEtats element) {
+    public void eteindre(AppareilDeuxEtats element) {
         this.aller(maison.chercher(element));
         element.eteindre();
     }
@@ -84,7 +84,7 @@ public class Habitant extends ObservableParametre {
         position = piece;
         this.notifier(position);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(Constante.tempsDeplacement);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

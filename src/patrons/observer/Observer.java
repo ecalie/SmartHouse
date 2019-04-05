@@ -1,5 +1,5 @@
 package patrons.observer;
 
-public interface Observer {
-    void update();
+public interface Observer<T> {
+    void update(T objet);
 }

@@ -3,7 +3,7 @@ package simulation.controleur;
 import simulation.modele.Habitant;
 import simulation.modele.Piece;
 import simulation.modele.element.Element;
-import simulation.modele.element.deuxEtats.DeuxEtats;
+import simulation.modele.element.deuxEtats.AppareilDeuxEtats;
 import simulation.modele.element.deuxEtats.Etat;
 import simulation.modele.element.utilisable.Utilisable;
 
@@ -30,11 +30,11 @@ public class ClickPiece implements MouseListener {
                     e.getY() <= mouseEvent.getY() && mouseEvent.getY() <= e.getY() + e.getLargeur()) {
                 if (e instanceof Utilisable)
                     habitant.utiliser((Utilisable) e);
-                else if (e instanceof DeuxEtats)
-                    if (((DeuxEtats) e).getEtat() == Etat.Eteint)
-                        habitant.allumer((DeuxEtats) e);
+                else if (e instanceof AppareilDeuxEtats)
+                    if (((AppareilDeuxEtats) e).getEtat() == Etat.Eteint)
+                        habitant.allumer((AppareilDeuxEtats) e);
                     else
-                        habitant.eteindre((DeuxEtats) e);
+                        habitant.eteindre((AppareilDeuxEtats) e);
 
                 elementTrouve = true;
                 break;

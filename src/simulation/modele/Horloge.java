@@ -2,7 +2,7 @@ package simulation.modele;
 
 import patrons.observer.Observable;
 
-public class Horloge extends Observable implements Runnable {
+public class Horloge extends Observable<Integer> implements Runnable {
 
     private static Horloge instance;
     private int heure;
@@ -25,20 +25,12 @@ public class Horloge extends Observable implements Runnable {
     public void run() {
         while (true) {
             heure = (heure + 1) % 24;
-            this.notifier();
+            this.notifier(heure);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(Constante.Heure);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        if (heure < 10)
-            return ("0" + heure + ":00");
-        else
-            return (heure + ":00");
     }
 }

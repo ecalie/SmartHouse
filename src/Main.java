@@ -1,7 +1,10 @@
-import intelligence_artificielle.modele.CapteurPassage;
+import intelligence_artificielle.modele.capteur.CapteurPassage;
+import intelligence_artificielle.modele.capteur.CapteurUtilisation;
+import intelligence_artificielle.modele.manager.ManagerGeneral;
 import intelligence_artificielle.vue.FenetreLogging;
 import simulation.modele.*;
 import simulation.modele.element.*;
+import simulation.modele.element.deuxEtats.AppareilDeuxEtats;
 import simulation.modele.element.deuxEtats.PlaqueCuisson;
 import simulation.modele.element.deuxEtats.Television;
 import simulation.modele.element.utilisable.*;
@@ -110,6 +113,13 @@ public class Main {
 
         couloir.ajouter(new Mur(0, 234, 50, 0));
 
+        for (Piece p : maison.getPieces()) {
+            for (Element e : p.getElements()) {
+                if (e instanceof Utilisable || e instanceof AppareilDeuxEtats)
+                    e.setCapteur(new CapteurUtilisation(e, p));
+            }
+        }
+
         Habitant habitant = new Habitant(maison);
 
         new Thread(Horloge.getInstance()).start();
@@ -119,6 +129,7 @@ public class Main {
 
         DessinMaison dessinMaison = new DessinMaison(maison, habitant);
         Horloge.getInstance().ajouterObserver(dessinMaison);
+        Horloge.getInstance().ajouterObserver(ManagerGeneral.getInstance());
 
         habitant.ajouterObserver(dessinMaison);
     }

@@ -1,10 +1,8 @@
 package simulation.vue;
 
 import patrons.observer.Observer;
-import patrons.observer.ObserverParametre;
 import simulation.controleur.ClickPiece;
 import simulation.modele.Habitant;
-import simulation.modele.Horloge;
 import simulation.modele.Maison;
 import simulation.modele.Piece;
 
@@ -13,7 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DessinMaison extends JFrame implements ObserverParametre, Observer {
+public class DessinMaison extends JFrame implements Observer<Object> {
 
     private List<DessinPiece> dessinPieces;
 
@@ -41,23 +39,22 @@ public class DessinMaison extends JFrame implements ObserverParametre, Observer 
     }
 
     @Override
-    public void update(Piece piece) {
-        for (DessinPiece dp : dessinPieces)
-            if (dp.getPiece() == piece)
-                dp.repaint();
-    }
-
-    @Override
-    public void update() {
-        for (DessinPiece dp : dessinPieces)
-            if (dp.getPiece().isLumiereAllumee()) {
-                dp.setBackground(new Color(200, 200, 200));
-            } else {
-                int heure = Horloge.getInstance().getHeure();
-                if (heure < 7 || heure > 21)
-                    dp.setBackground(new Color(100, 100, 100));
-                else
-                    dp.setBackground(new Color(180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10));
-            }
+    public void update(Object objet) {
+        if (objet instanceof Piece) {
+            for (DessinPiece dp : dessinPieces)
+                if (dp.getPiece() == objet)
+                    dp.repaint();
+        } else if (objet instanceof Integer) {
+            int heure = (Integer) objet;
+            for (DessinPiece dp : dessinPieces)
+                if (dp.getPiece().isLumiereAllumee()) {
+                    dp.setBackground(new Color(200, 200, 200));
+                } else {
+                    if (heure < 7 || heure > 21)
+                        dp.setBackground(new Color(100, 100, 100));
+                    else
+                        dp.setBackground(new Color(180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10));
+                }
+        }
     }
 }

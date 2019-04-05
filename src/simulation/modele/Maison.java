@@ -1,7 +1,7 @@
 package simulation.modele;
 
-import intelligence_artificielle.modele.Capteur;
-import intelligence_artificielle.modele.CapteurPassage;
+import intelligence_artificielle.modele.capteur.Capteur;
+import intelligence_artificielle.modele.capteur.CapteurPassage;
 import simulation.modele.element.Element;
 
 import java.util.ArrayList;

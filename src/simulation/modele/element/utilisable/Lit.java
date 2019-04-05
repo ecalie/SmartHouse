@@ -9,6 +9,7 @@ public class Lit extends Utilisable {
     public Lit(int x, int y, int longueur, int largeur, Orientation orientation) {
         super(x, y, longueur, largeur);
         this.orientation = orientation;
+
     }
 
     public Orientation getOrientation() {
