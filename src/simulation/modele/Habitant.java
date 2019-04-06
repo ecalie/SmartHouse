@@ -61,15 +61,16 @@ public class Habitant extends Observable {
 
     public void entrerMaison() {
         // déclencher le bon capteur
-        maison.recupererCapteurPassage(position, maison.getEntree()).declencher();
         this.position = maison.getEntree();
+        maison.recupererCapteurPassage(null, maison.getEntree()).declencher();
         this.notifier(position);
     }
 
     public void sortirMaison() {
-        assert (this.position == maison.getEntree());
-        this.notifier(position);
+        this.aller(maison.getEntree());
         this.position = null;
+        maison.recupererCapteurPassage(maison.getEntree(), null).declencher();
+        this.notifier(position);
     }
 
     /**

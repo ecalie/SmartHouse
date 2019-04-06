@@ -8,6 +8,8 @@ import simulation.modele.Piece;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,24 @@ public class DessinMaison extends JFrame implements Observer<Object> {
             panel.add(dessinPiece, gbc);
             dessinPieces.add(dessinPiece);
         }
+
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent keyEvent) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    habitant.sortirMaison();
+            }
+
+            @Override
+            public void keyReleased(KeyEvent keyEvent) {
+
+            }
+        });
 
         this.add(panel);
         this.setVisible(true);

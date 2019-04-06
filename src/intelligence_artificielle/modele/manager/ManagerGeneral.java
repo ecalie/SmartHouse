@@ -53,10 +53,9 @@ public class ManagerGeneral implements Observer<Object> {
         if (objet instanceof Integer) {
             if (positionHabitant != null && !habitantDort)
                 lumiereManager.gererLumiere((Integer) objet, positionHabitant);
-        }
-         else if (objet instanceof CapteurPassage)
+        } else if (objet instanceof CapteurPassage)
             this.traiterPassage((CapteurPassage) objet);
-         else if (objet instanceof CapteurUtilisation)
+        else if (objet instanceof CapteurUtilisation)
             this.traiterUtilisation((CapteurUtilisation) objet);
 
     }
@@ -80,7 +79,13 @@ public class ManagerGeneral implements Observer<Object> {
         appareilManager.stopper(positionHabitant);
         temperatureManager.gererTemperature(positionHabitant, habitantDort);
 
-        FenetreLogging.ajouterLoggingCapteur("L'habitant entre dans la pièce : " + positionHabitant);
+        if (capteur.getPiece1() == null || capteur.getPiece2() == null)
+            if (positionHabitant == null)
+                FenetreLogging.ajouterLoggingCapteur("L'habitant sort de la maison");
+            else
+                FenetreLogging.ajouterLoggingCapteur("L'habitant entre dans la maison");
+        else
+            FenetreLogging.ajouterLoggingCapteur("L'habitant entre dans la pièce : " + positionHabitant);
 
     }
 
