@@ -13,7 +13,7 @@ public class DessinHorloge extends JFrame implements Observer<Integer> {
     public DessinHorloge() {
         super("Horloge");
         this.heure = new JTextArea(1, 5);
-        heure.setText(Horloge.getInstance().toString());
+        this.heure.setText((Horloge.getInstance().getHeure() < 10 ? "0" : "") + Horloge.getInstance().getHeure() + ":00");
         heure.setBackground(Color.DARK_GRAY);
         heure.setForeground(Color.WHITE);
         heure.setFont(new Font("Arial", Font.BOLD, 25));

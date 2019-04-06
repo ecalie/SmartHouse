@@ -5,7 +5,6 @@ import simulation.modele.Piece;
 
 public class LumiereManager {
 
-
     public void traiterPassage(Piece depart, Piece arrivee) {
         this.eteindrePiece(depart);
         this.allumerPiece(arrivee);

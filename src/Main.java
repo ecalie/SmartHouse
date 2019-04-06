@@ -10,6 +10,7 @@ import simulation.modele.element.deuxEtats.Television;
 import simulation.modele.element.utilisable.*;
 import simulation.vue.DessinHorloge;
 import simulation.vue.DessinMaison;
+import simulation.vue.DessinThermostat;
 
 import java.util.HashMap;
 
@@ -120,14 +121,18 @@ public class Main {
             }
         }
 
+        ManagerGeneral.getInstance().setMaison(maison);
         Habitant habitant = new Habitant(maison);
+
+        DessinMaison dessinMaison = new DessinMaison(maison, habitant);
 
         new Thread(Horloge.getInstance()).start();
         Horloge.getInstance().ajouterObserver(new DessinHorloge());
 
+        new DessinThermostat(maison.getThermostat());
+
         FenetreLogging.initialiser();
 
-        DessinMaison dessinMaison = new DessinMaison(maison, habitant);
         Horloge.getInstance().ajouterObserver(dessinMaison);
         Horloge.getInstance().ajouterObserver(ManagerGeneral.getInstance());
 

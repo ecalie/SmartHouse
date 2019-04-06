@@ -12,10 +12,12 @@ public class Maison {
     private List<Piece> pieces;
     private Piece entree;
     private List<Capteur> capteurs;
+    private Thermostat thermostat;
 
     public Maison() {
         this.pieces = new ArrayList<>();
         this.capteurs = new ArrayList<>();
+        this.thermostat = new Thermostat();
     }
 
     public Piece getEntree() {
@@ -28,6 +30,10 @@ public class Maison {
 
     public List<Piece> getPieces() {
         return pieces;
+    }
+
+    public Thermostat getThermostat() {
+        return thermostat;
     }
 
     public void ajouterSalle(Piece piece) {
