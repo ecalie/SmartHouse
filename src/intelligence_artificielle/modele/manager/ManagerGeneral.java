@@ -48,6 +48,10 @@ public class ManagerGeneral implements Observer<Object> {
         this.temperatureManager.setThermostat(maison.getThermostat());
     }
 
+    public Piece getPositionHabitant() {
+        return positionHabitant;
+    }
+
     @Override
     public void update(Object objet) {
         if (objet instanceof Integer) {
@@ -78,15 +82,6 @@ public class ManagerGeneral implements Observer<Object> {
         }
         appareilManager.stopper(positionHabitant);
         temperatureManager.gererTemperature(positionHabitant, habitantDort);
-
-        if (capteur.getPiece1() == null || capteur.getPiece2() == null)
-            if (positionHabitant == null)
-                FenetreLogging.ajouterLoggingCapteur("L'habitant sort de la maison");
-            else
-                FenetreLogging.ajouterLoggingCapteur("L'habitant entre dans la maison");
-        else
-            FenetreLogging.ajouterLoggingCapteur("L'habitant entre dans la pièce : " + positionHabitant);
-
     }
 
     private void traiterUtilisation(CapteurUtilisation capteur) {
@@ -97,19 +92,12 @@ public class ManagerGeneral implements Observer<Object> {
                 temperatureManager.gererTemperature(positionHabitant, habitantDort);
             }
 
-            FenetreLogging.ajouterLoggingCapteur("L'habitant " +
-                    (capteur.getEtat() == Etat.Allume ? "utilise " : "a fini d'utiliser ") +
-                    capteur.getAppareil().getClass().getSimpleName());
-
         } else if (capteur.getAppareil() instanceof AppareilDeuxEtats) {
             AppareilDeuxEtats appareil = (AppareilDeuxEtats) capteur.getAppareil();
             if (capteur.getEtat() == Etat.Allume)
                 appareilsAllumes.put(appareil, capteur.getPiece());
             else
                 appareilsAllumes.remove(appareil);
-
-            FenetreLogging.ajouterLoggingCapteur("L'habitant a " +
-                    capteur.getEtat() + " " + appareil.getClass().getSimpleName());
         }
     }
 

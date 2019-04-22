@@ -8,7 +8,7 @@ public class Horloge extends Observable<Integer> implements Runnable {
     private int heure;
 
     private Horloge() {
-        heure = 10;
+        heure = 05;
     }
 
     public static Horloge getInstance() {

@@ -25,17 +25,11 @@ public class LumiereManager {
             chambre.allumer();
     }
 
-    /**
-     * Allumer en entrant
-     */
     private void allumerPiece(Piece piece) {
         if (piece != null && Horloge.getInstance().getHeure() < 9 || Horloge.getInstance().getHeure() > 19)
             piece.allumer();
     }
 
-    /**
-     * Eteindre en sortant
-     */
     private void eteindrePiece(Piece piece) {
         if (piece != null && piece.isLumiereAllumee())
             piece.eteindre();

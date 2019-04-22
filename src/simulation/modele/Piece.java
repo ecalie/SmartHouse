@@ -29,8 +29,6 @@ public class Piece {
         this.habitantY = habitantY;
         this.elements = new ArrayList<>();
         this.lumiereAllumee = false;
-        // TODO
-        // this.capteurTemperature = new CapteurAnalogique(0,40,20);
     }
 
     public List<Element> getElements() {

@@ -28,20 +28,25 @@ public class AppareilManager {
     }
 
     public void stopper(Piece piece) {
+        // la perosnne est revenu dans la pièce
         if (threads.containsKey(piece)) {
             for (ThreadSlave thread : threads.get(piece)) {
-                thread.destroy();
+                thread.stop();
             }
             threads.remove(piece);
         }
     }
 
     public void terminer(ThreadSlave thread) {
+        // le compte à rebourd est terminé
         for (Piece p : threads.keySet())
             threads.get(p).remove(thread);
     }
 }
 
+/**
+ * Lancer un chrnonomètre avant d'éteindre les appareils.
+ */
 class ThreadSlave extends Thread {
     private AppareilDeuxEtats appareil;
     private AppareilManager manager;
