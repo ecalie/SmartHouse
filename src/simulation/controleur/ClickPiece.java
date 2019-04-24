@@ -22,8 +22,12 @@ public class ClickPiece implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
+        // faire déplacer l'habitant
+        // et le faire terminer ce qu'il fait
+        // et utiliser un appareil si on clique sur un appareil
         habitant.terminerAction();
 
+        // regarder si on vient de cliquer sur un appareil
         boolean elementTrouve = false;
         for (Element e : piece.getElements()) {
             if (e.getX() <= mouseEvent.getX() && mouseEvent.getX() <= e.getX() + e.getLongueur() &&
@@ -40,6 +44,8 @@ public class ClickPiece implements MouseListener {
                 break;
             }
         }
+
+        // sinon simplement faire déplacer l'habitant dans la pièce
         if (!elementTrouve)
             habitant.aller(piece);
     }

@@ -40,6 +40,16 @@ public class Maison {
         this.pieces.add(piece);
     }
 
+    public void ajouterCapteur(Capteur capteur) {
+        this.capteurs.add(capteur);
+    }
+
+    /**
+     * Chercher la pièce dans laquelle se trouve un élément.
+     *
+     * @param element L'élément cherché
+     * @return La pièce dans laquelle se trouve `élément`
+     */
     public Piece chercher(Element element) {
         for (Piece p : pieces)
             for (Element e : p.getElements())
@@ -48,10 +58,13 @@ public class Maison {
         return null;
     }
 
-    public void ajouterCapteur(Capteur capteur) {
-        this.capteurs.add(capteur);
-    }
-
+    /**
+     * Récupérer un capteur entre deux pièce.
+     *
+     * @param piece1 La pièce d'un côté du capteur
+     * @param piece2 La pièce de l'autre côté du capteur
+     * @return Le capteur entre `piece1` et `piece2`
+     */
     public CapteurPassage recupererCapteurPassage(Piece piece1, Piece piece2) {
         for (Capteur c : capteurs)
             if (c instanceof CapteurPassage) {

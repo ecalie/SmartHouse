@@ -2,7 +2,6 @@ package intelligence_artificielle.modele.manager;
 
 import intelligence_artificielle.modele.capteur.CapteurPassage;
 import intelligence_artificielle.modele.capteur.CapteurUtilisation;
-import intelligence_artificielle.vue.FenetreLogging;
 import patrons.observer.Observer;
 import simulation.modele.Maison;
 import simulation.modele.Piece;
@@ -21,9 +20,6 @@ public class ManagerGeneral implements Observer<Object> {
     private LumiereManager lumiereManager;
     private AppareilManager appareilManager;
     private TemperatureManager temperatureManager;
-
-    // la maison qui est gérée par le manager
-    private Maison maison;
 
     // état interne (croyances)
     private Piece positionHabitant;
@@ -44,7 +40,6 @@ public class ManagerGeneral implements Observer<Object> {
     }
 
     public void setMaison(Maison maison) {
-        this.maison = maison;
         this.temperatureManager.setThermostat(maison.getThermostat());
     }
 
@@ -54,16 +49,25 @@ public class ManagerGeneral implements Observer<Object> {
 
     @Override
     public void update(Object objet) {
+        // un capteur s'est déclenché
         if (objet instanceof Integer) {
+            // l'heure a changée
+            // gérer la lumière si l'habitant ne dort pas
             if (positionHabitant != null && !habitantDort)
                 lumiereManager.gererLumiere((Integer) objet, positionHabitant);
         } else if (objet instanceof CapteurPassage)
+            // l'habitant s'est déplacé
             this.traiterPassage((CapteurPassage) objet);
         else if (objet instanceof CapteurUtilisation)
+            // l'habitant utilise ou termine d'utiliser un appareil
             this.traiterUtilisation((CapteurUtilisation) objet);
-
     }
 
+    /**
+     * Traiter le déplcement de l'habitant.
+     *
+     * @param capteur Le capteur de passage qui s'est déclenché
+     */
     private void traiterPassage(CapteurPassage capteur) {
         // regarder si un appareil a été laissé allumé
         // prévenir l'appareilManager si c'est le cas
@@ -84,15 +88,24 @@ public class ManagerGeneral implements Observer<Object> {
         temperatureManager.gererTemperature(positionHabitant, habitantDort);
     }
 
+    /**
+     * Traiter l'utilisation d'un appareil.
+     *
+     * @param capteur Le capteur d'utilistion qui s'est déclenché
+     */
     private void traiterUtilisation(CapteurUtilisation capteur) {
         if (capteur.getAppareil() instanceof Utilisable) {
             if (capteur.getAppareil() instanceof Lit) {
+                // L'habitant vient de se lever ou de se coucher
+                // gérer la température et la lumière
                 habitantDort = !habitantDort;
                 lumiereManager.traiterLit(habitantDort, capteur.getPiece());
                 temperatureManager.gererTemperature(positionHabitant, habitantDort);
             }
 
         } else if (capteur.getAppareil() instanceof AppareilDeuxEtats) {
+            // L'habitant vient d'allumer ou d'éteindre un appareil
+            // mise à jour de la liste des apprails allumés
             AppareilDeuxEtats appareil = (AppareilDeuxEtats) capteur.getAppareil();
             if (capteur.getEtat() == Etat.Allume)
                 appareilsAllumes.put(appareil, capteur.getPiece());
@@ -100,6 +113,4 @@ public class ManagerGeneral implements Observer<Object> {
                 appareilsAllumes.remove(appareil);
         }
     }
-
-
 }

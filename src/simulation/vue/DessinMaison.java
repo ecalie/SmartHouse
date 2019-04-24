@@ -1,6 +1,7 @@
 package simulation.vue;
 
 import patrons.observer.Observer;
+import simulation.controleur.ActionSortir;
 import simulation.controleur.ClickPiece;
 import simulation.modele.Habitant;
 import simulation.modele.Maison;
@@ -8,8 +9,6 @@ import simulation.modele.Piece;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +21,7 @@ public class DessinMaison extends JFrame implements Observer<Object> {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
+        // dessiner toutes les pièces
         for (Piece p : maison.getPieces()) {
             gbc.gridx = p.getX();
             gbc.gridy = p.getY();
@@ -34,23 +34,7 @@ public class DessinMaison extends JFrame implements Observer<Object> {
             dessinPieces.add(dessinPiece);
         }
 
-        this.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent keyEvent) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.VK_ESCAPE)
-                    habitant.sortirMaison();
-            }
-
-            @Override
-            public void keyReleased(KeyEvent keyEvent) {
-
-            }
-        });
+        this.addKeyListener(new ActionSortir(habitant));
 
         this.add(panel);
         this.setVisible(true);
@@ -61,10 +45,12 @@ public class DessinMaison extends JFrame implements Observer<Object> {
     @Override
     public void update(Object objet) {
         if (objet instanceof Piece) {
+            // si l'habitant change de pièce
             for (DessinPiece dp : dessinPieces)
                 if (dp.getPiece() == objet)
                     dp.repaint();
         } else if (objet instanceof Integer) {
+            // si l'heure change, modifier les lumières
             int heure = (Integer) objet;
             for (DessinPiece dp : dessinPieces)
                 if (dp.getPiece().isLumiereAllumee()) {

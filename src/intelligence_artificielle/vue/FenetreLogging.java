@@ -18,11 +18,19 @@ public class FenetreLogging extends JFrame {
         this.setLocation(500, 100);
     }
 
+    /**
+     * Initialiser la fenêtre.
+     */
     public static void initialiser() {
         if (instance == null)
             instance = new FenetreLogging();
     }
 
+    /**
+     * Ajouter une action de l'habitant.
+     *
+     * @param texte Description de cette action
+     */
     public static void ajouterLoggingCapteur(String texte) {
         if (instance == null)
             instance = new FenetreLogging();

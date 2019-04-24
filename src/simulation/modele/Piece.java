@@ -63,10 +63,6 @@ public class Piece {
         return lumiereAllumee;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
     public HashMap<Point, Piece> getConnexionsEntrePieces() {
         return connexionsEntrePieces;
     }
@@ -79,13 +75,17 @@ public class Piece {
         this.connexionsEntrePieces = connexions;
     }
 
+    /**
+     * Allumer la lumière de la pièce.
+     */
     public void allumer() {
-        assert (this.lumiereAllumee == false);
         this.lumiereAllumee = true;
     }
 
+    /**
+     * Eteindre la lumière de la pièce.
+     */
     public void eteindre() {
-        assert (this.lumiereAllumee == true);
         this.lumiereAllumee = false;
     }
 

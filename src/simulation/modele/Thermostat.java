@@ -10,6 +10,11 @@ public class Thermostat extends Observable<Integer> {
         this.temperatureCible = 22;
     }
 
+    /**
+     * Régler la température dans la maison.
+     *
+     * @param nouvelleTemperature La nouvelle température
+     */
     public void reglerTemperature(int nouvelleTemperature) {
         this.temperatureCible = nouvelleTemperature;
         this.notifier(this.temperatureCible);

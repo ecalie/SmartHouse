@@ -19,7 +19,6 @@ import java.util.List;
 
 public class DessinPiece extends JPanel {
 
-
     private Piece piece;
     private List<DessinElement> elements;
     private Habitant habitant;
@@ -35,8 +34,13 @@ public class DessinPiece extends JPanel {
         return piece;
     }
 
+    /**
+     * Desiiner la pièce.
+     */
     private void initialiser() {
         this.elements = new ArrayList<>();
+
+        // dessiner tous les éléments de la pièce
         for (simulation.modele.element.Element e : piece.getElements()) {
             if (e instanceof Baignoire)
                 elements.add(new DessinBaignoire((Baignoire) e));
@@ -79,6 +83,7 @@ public class DessinPiece extends JPanel {
         if (this.elements == null)
             initialiser();
 
+        // modifier la couleur de fond selon l'heure
         if (piece.isLumiereAllumee()) {
             this.setBackground(new Color(200, 200, 200));
         } else {
@@ -89,9 +94,11 @@ public class DessinPiece extends JPanel {
                 this.setBackground(new Color(180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10, 180 - Math.abs(14 - heure) * 10));
         }
 
+        // redessiner les éléments
         for (DessinElement e : elements)
             e.dessiner(g);
 
+        // dessiner l'habitant s'il est dans la pièce
         if (habitant.getPosition() == piece)
             new DessinHabitant().dessiner(g, piece.getHabitantX(), piece.getHabitantY());
     }

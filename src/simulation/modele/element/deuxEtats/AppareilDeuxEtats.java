@@ -15,11 +15,17 @@ public abstract class AppareilDeuxEtats extends Element {
         return etat;
     }
 
+    /**
+     * Allumer l'appareil.
+     */
     public void allumer() {
         assert (etat == Etat.Eteint);
         this.capteur.declencher();
     }
 
+    /**
+     * Eteindre l'appareil.
+     */
     public void eteindre() {
         assert (etat == Etat.Allume);
         this.capteur.declencher();

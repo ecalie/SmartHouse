@@ -27,17 +27,23 @@ public class Habitant extends Observable {
     // FAIRE ACTION //
     //////////////////
 
+    /**
+     * Utiliser du mobilier.
+     *
+     * @param element Le mobilier utilisé
+     */
     public void utiliser(Utilisable element) {
-        try {
-            this.aller(maison.chercher(element));
-            this.elementUtilise = element;
-            element.utiliser();
+        // se déplacer jusqu'à l'appareil
+        this.aller(maison.chercher(element));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // l'utiliser
+        this.elementUtilise = element;
+        element.utiliser();
     }
 
+    /**
+     * Temriner d'utiliser le mobilier utilisé.
+     */
     public void terminerAction() {
         if (this.elementUtilise != null) {
             this.elementUtilise.liberer();
@@ -45,13 +51,29 @@ public class Habitant extends Observable {
         }
     }
 
+    /**
+     * Allumer un appareil.
+     *
+     * @param element L'appareil a allumer
+     */
     public void allumer(AppareilDeuxEtats element) {
+        // se déplacer jusqu'à l'appareil
         this.aller(maison.chercher(element));
+
+        // allumer l'appareil
         element.allumer();
     }
 
+    /**
+     * Eteindre un appareil.
+     *
+     * @param element L'appareil à éteindre
+     */
     public void eteindre(AppareilDeuxEtats element) {
+        // se déplacer jusqu'à l'appareil
         this.aller(maison.chercher(element));
+
+        // éeindre l'appareil
         element.eteindre();
     }
 
@@ -59,15 +81,29 @@ public class Habitant extends Observable {
     // SE DEPLACER //
     /////////////////
 
+    /**
+     * Entrer dans la maison.
+     */
     public void entrerMaison() {
+        // modifier la position de l'habitant
         this.position = maison.getEntree();
+
+        // déclencher le capteur de passage de l'entrée
         maison.recupererCapteurPassage(null, maison.getEntree()).declencher();
         this.notifier(position);
     }
 
+    /**
+     * Sortir de la maison.
+     */
     public void sortirMaison() {
+        // Faire déplacer l'habitant jusqu'à la porte d'entrée
         this.aller(maison.getEntree());
+
+        // modifier la position de l'habitant
         this.position = null;
+
+        // déclencher le capteur de passage de l'entrée
         maison.recupererCapteurPassage(maison.getEntree(), null).declencher();
         this.notifier(position);
     }
@@ -80,6 +116,9 @@ public class Habitant extends Observable {
     private void seDeplacer(Piece piece) {
         // déclencher le bon capteur
         maison.recupererCapteurPassage(position, piece).declencher();
+
+        // modifier la position de l'habitant
+        // et notifier avant et après le déplacement (pour l'affichage)
         this.notifier(position);
         position = piece;
         this.notifier(position);
@@ -101,24 +140,44 @@ public class Habitant extends Observable {
             this.entrerMaison();
         }
 
+        // trouver le chemin jusqu'à la pièce
         List<Piece> chemin = this.trouverChemin(piece, position, new ArrayList<>());
         for (Piece p : chemin)
             this.seDeplacer(p);
     }
 
+    /**
+     * Trouver le chemin vers un pièce de la maison.
+     *
+     * @param but      La pièce destination
+     * @param position La position actuelle
+     * @param chemin   Le chemin jusqu'à la position actuelle
+     * @return Le chemin complet
+     */
     private List<Piece> trouverChemin(Piece but, Piece position, List<Piece> chemin) {
+        // si l'habitant est arrivé
         if (position == but) {
             return chemin;
         }
 
+        // sinon trouvé un chemin
         for (Point pt : position.getConnexionsEntrePieces().keySet()) {
+            // pour chaque pièce voisine de la position actuelle
             Piece p = position.getConnexionsEntrePieces().get(pt);
+
+            // si cette pièce voisine n'est pas deéjà dans le chemin
             if (!chemin.contains(p) && p != null) {
+                // l'ajouter au chemin
                 chemin.add(p);
 
+                // regarder si cette pièce permet d'aller jusqu'à la destination
                 List<Piece> ch = trouverChemin(but, p, chemin);
+
+                // si oui, retouner le chemin
                 if (ch != null)
                     return ch;
+
+                // sinon ertier cette pièce du chemin et reprendre avec une autre pièce voisine
                 chemin.remove(p);
             }
         }

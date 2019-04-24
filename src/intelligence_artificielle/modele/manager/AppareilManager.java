@@ -17,18 +17,22 @@ public class AppareilManager {
     }
 
     public void traiterAppareil(AppareilDeuxEtats appareil, Piece piece) {
-        // un appareil a été allumé
+        // un appareil est allumée et l'habitan vient de sortir de la pièce
+        // démarrer un thre pour l'appareil
         ThreadSlave threadSlave = new ThreadSlave(appareil, this);
+
+        // ajouter ce thread à la map des threads
         if (!threads.containsKey(piece)) {
             threads.put(piece, new ArrayList<>());
         }
         threads.get(piece).add(threadSlave);
 
+        // démarrer le thread
         threadSlave.start();
     }
 
     public void stopper(Piece piece) {
-        // la perosnne est revenu dans la pièce
+        // la personne est revenu dans la pièce
         if (threads.containsKey(piece)) {
             for (ThreadSlave thread : threads.get(piece)) {
                 thread.stop();

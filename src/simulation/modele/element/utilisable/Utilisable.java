@@ -8,10 +8,16 @@ public abstract class Utilisable extends Element {
         super(x, y, longueur, largeur);
     }
 
+    /**
+     * Utilise du mobilier.
+     */
     public void utiliser() {
         this.capteur.declencher();
     }
 
+    /**
+     * Libérer le mobilier.
+     */
     public void liberer() {
         this.capteur.declencher();
     }

@@ -9,6 +9,9 @@ public abstract class Capteur extends Observable<Capteur> {
         this.ajouterObserver(ManagerGeneral.getInstance());
     }
 
+    /**
+     * Le capteur se déclenche.
+     */
     public void declencher() {
         this.notifier(this);
     }
